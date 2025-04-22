@@ -1,0 +1,20 @@
+[package]
+name = 'r_dtscan'
+publish = false
+version = '0.1.0'
+edition = '2021'
+rust-version = '1.65'
+
+[lib]
+crate-type = [ 'staticlib' ]
+name = 'r_dtscan'
+
+[dependencies]
+extendr-api = '*'
+delaunator = "1.0.2"
+geo = "0.28.0"
+geo-types = "0.7.13"
+itertools = "0.12.1"
+rand = "0.8.5"
+rayon = "1.9.0"
+statrs = "0.16.0"

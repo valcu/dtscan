@@ -1,0 +1,64 @@
+---
+title: "dtscan"
+format: gfm
+---
+
+Triangle‑Based Density Clustering of 2D Points via Delaunay Graphs
+
+dtscan provides density‑based clustering for 2D point sets by leveraging a Delaunay triangulation graph. This package offers R bindings to the Rust implementation originally developed in [Xenobalanus (randogoth/xenobalanus)](https://github.com/randogoth/xenobalanus), based on the algorithm of [Kim & Cho (2019) Delaunay triangulation-based spatial clustering technique for enhanced adjacent boundary detection and segmentation of LiDAR 3D point clouds.](https://pmc.ncbi.nlm.nih.gov/articles/PMC6767241/)
+
+---
+
+## Installation 
+
+- **R** (≥ 4.4.0)  
+
+```r
+remotes::install_github("valcu/dtscan")
+```
+
+---
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "DBSCAN vs DTSCan comparison"
+#| fig-save: "readme1.png"
+
+
+library(dtscan)
+library(dbscan)
+library(ggplot2)
+library(data.table)
+
+data(Dataset_1)
+x1 = Dataset_1 |> setDT()
+x1[, method := 'true class']
+
+x2 = copy(x1)
+x2[, let(
+  class = dbscan(x2[, .(x,y)], eps = 0.1)$cluster, 
+  method = 'dbscan')
+]
+
+x3 = copy(x2)
+x3[, let(
+  class = dtscan(x3[, .(x,y)], max_closeness= 0.1) , 
+  method = 'dtscan')
+]
+x = rbindlist(list(x1,x2,x3))
+x[class == 0, class := NA]
+x[, class := factor(class)]
+
+g = ggplot(x, aes(x = x, y = y, color = class)) + 
+facet_wrap(~method, nrow = 1) + 
+geom_point()
+
+
+
+
+```
+
+ ![DBSCAN vs DTSCAN comparison](readme1.png){width="100%"}

@@ -1,0 +1,38 @@
+Package: dtscan
+Type: Package
+Title: Triangle-Based Density Clustering of 2D Points via Delaunay Graphs
+Version: 0.0.1
+Authors@R: 
+    person("Mihai", "Valcu", , "mvalcu@gwdg.de", role = c("aut", "cre"),
+        comment = c(ORCID = "0000-0002-6907-7802"))
+Description: |
+    Implements dtscan, a triangle-based density clustering algorithm for planar
+    point sets using Delaunay triangulation.
+    Clusters emerge by iteratively linking points whose connecting edges fall
+    below a user-defined distance threshold, effectively applying a dtscan-style
+    density rule on the triangulation graph.
+    Provides R bindings to the Rust implementation at
+    <https://github.com/randogoth/xenobalanus/>. The underlying spatial clustering
+    technique was proposed by Kim & Cho (2019) in
+    "Delaunay triangulation-based spatial clustering technique for enhanced
+    adjacent boundary detection and segmentation of LiDAR'3D point clouds."
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    R (>= 4.4.0)
+Suggests: 
+    rextendr (>= 0.3.1),
+    roxygen2 (>= 7.3.2),
+    testthat (>= 3.0.0)   
+URL: 
+    https://github.com/valcu/dtscan
+BugReports: 
+    https://github.com/valcu/dtscan/issues
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Config/rextendr/version: 0.3.1.9001
+SystemRequirements: 
+    SystemRequirements: Cargo (Rust's package manager), rustc >= 1.85.0
+Language: en-US    
+Config/testthat/edition: 3
