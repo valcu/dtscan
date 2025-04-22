@@ -20,6 +20,14 @@ remotes::install_github("valcu/dtscan")
 ---
 
 
+```r
+dbscan(xy, eps = 0.1)
+
+dtscan(xy, max_closeness = 0.1)
+
+```
+
+
 ```{r}
 #| echo: false
 #| message: false
